@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+   
+</head>
+<body style="height: 100vh; justify-content: center; align-items: center; background-color: #f8f9fa; font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0; box-sizing: border-box; display: flex; flex-direction: column;display: flexbox;" id="app">
+    <form action="/submit" method="POST">
+       <div>
+        <h1 style="color: #ff0101;">World Capital Quiz</h1>
+        
+        <h3>
+            Total Score: <%= locals.totalScore? totalScore : "0" %>
+
+        </h3>
+        <label for="userInput">
+            
+            <h1>
+            Country:<%= question.country %>
+        </h1>
+        <br/>
+        </label>
+        
+        <input type="text" class="form-control" required name="answer" id="userInput" placeholder="Enter the capital" autofocus autocomplete="off"/>
+       </div>
+
+       <button type="submit" class="btn btn-success m-5">Submit</button>
+  
+  
+    </form>
+
+    <script>
+        var wasCorrect = "<%= locals.wasCorrect %>";
+        console.log(wasCorrect)
+        if (wasCorrect === "false") {
+            alert('Game over! Final best score: <%= locals.totalScore %>');
+            document.getElementById("app").innerHTML = '<a href="/" class="btn btn-primary">Restart</a>'
+        }
+         else if (wasCorrect === "true") {
+            alert('Correct! Your score is now: <%= locals.totalScore %>');
+        }
+    </script>
+</body>
+</html>
